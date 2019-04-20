@@ -6,3 +6,21 @@
 @Author  : Bonan Ruan
 @Desc    :
 """
+
+from utils import consts
+from utils import utils
+
+def initialize():
+    return
+
+def start_idf():
+
+    return
+
+def finish():
+    return
+
+if __name__ == "__main__":
+    initialize()
+    start_idf()
+    finish()
