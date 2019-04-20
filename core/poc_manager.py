@@ -6,3 +6,7 @@
 @Author  : Bonan Ruan
 @Desc    :
 """
+
+class PoCManager:
+    def __init__(self):
+        pass

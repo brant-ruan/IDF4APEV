@@ -1,0 +1,47 @@
+{
+  "cve-2015-3636": {
+    "cveId": "",
+    "vulnKernelVersion": "",
+    "vulnAndroidVersion": "",
+    "pocIsAvailable": "",
+    "pocId": "",
+    "patchDate": "",
+    "comment": ""
+  },
+  "cve-2016-0728": {
+    "cveId": "",
+    "vulnKernelVersion": "",
+    "vulnAndroidVersion": "",
+    "pocIsAvailable": "",
+    "pocId": "",
+    "patchDate": "",
+    "comment": ""
+  },
+  "cve-2016-5195": {
+    "cveId": "",
+    "vulnKernelVersion": "",
+    "vulnAndroidVersion": "",
+    "pocIsAvailable": "",
+    "pocId": "",
+    "patchDate": "",
+    "comment": ""
+  },
+  "cve-2017-7533": {
+    "cveId": "",
+    "vulnKernelVersion": "",
+    "vulnAndroidVersion": "",
+    "pocIsAvailable": "",
+    "pocId": "",
+    "patchDate": "",
+    "comment": ""
+  },
+  "cve-2017-10661": {
+    "cveId": "",
+    "vulnKernelVersion": "",
+    "vulnAndroidVersion": "",
+    "pocIsAvailable": "",
+    "pocId": "",
+    "patchDate": "",
+    "comment": ""
+  }
+}

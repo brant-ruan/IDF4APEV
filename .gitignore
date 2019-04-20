@@ -18,4 +18,5 @@ bin-release/
 # information for Eclipse / Flash Builder.
 .idea/
 venv/
-.
+build_tools/ndk/
+*.DS_Store

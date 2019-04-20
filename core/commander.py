@@ -6,3 +6,7 @@
 @Author  : Bonan Ruan
 @Desc    :
 """
+
+class Commander:
+    def __init__(self):
+        pass

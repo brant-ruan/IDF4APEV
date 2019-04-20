@@ -8,3 +8,4 @@
 """
 
 IDF_HOME = ""
+DATABASE = "data.db"

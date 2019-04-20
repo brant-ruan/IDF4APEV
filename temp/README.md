@@ -1,0 +1,1 @@
+This directory (temp/) is used to lay PoC binaries and other files generated during IDF's running.

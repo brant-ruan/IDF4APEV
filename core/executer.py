@@ -6,3 +6,7 @@
 @Author  : Bonan Ruan
 @Desc    :
 """
+
+class Executer:
+    def __init__(self):
+        pass
