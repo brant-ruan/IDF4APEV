@@ -9,12 +9,26 @@
 
 from utils import consts
 from utils import utils
+import cmd
+
+class IDFShell(cmd.Cmd, object):
+    def preloop(self):
+        print("Hello")
+        super(IDFShell, self).preloop()
+    def postloop(self):
+        print("Bye.")
+        super(IDFShell, self).postloop()
+    def emptyline(self):
+        pass
+    def help_add(self):
+        print("add two integral numbers")
 
 def initialize():
     return
 
 def start_idf():
-
+    shell = IDFShell()
+    shell.cmdloop()
     return
 
 def finish():
