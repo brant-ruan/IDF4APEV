@@ -2,6 +2,8 @@
 
 ## Overview
 
+![banner](resources/images/banner.png)
+
 **IDF4APEV** refers to *Integrated Detection Framework for Android's Privilege Escalation Vulnerabilites*.
 
 ## Developing Process
@@ -31,3 +33,7 @@ pip install -r requirements.txt
 ## Installation
 
 remain to be done :)
+
+## Acknowledgement
+
+The banner is create with the help of **toilet**, which is a very interesting tool and can be installed through `brew install toilet` on Mac OSX.
