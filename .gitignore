@@ -20,3 +20,4 @@ bin-release/
 venv/
 build_tools/ndk/
 *.DS_Store
+*.pyc

@@ -13,7 +13,7 @@ import cmd
 
 class IDFShell(cmd.Cmd, object):
     def preloop(self):
-        print("Hello")
+        print(consts.banner)
         super(IDFShell, self).preloop()
     def postloop(self):
         print("Bye.")
