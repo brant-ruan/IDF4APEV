@@ -36,4 +36,4 @@ remain to be done :)
 
 ## Acknowledgement
 
-The banner is create with the help of **toilet**, which is a very interesting tool and can be installed through `brew install toilet` on Mac OSX.
+The banner is create with the help of *toilet*, which is a very interesting tool and can be installed through `brew install toilet` on Mac OSX :)
