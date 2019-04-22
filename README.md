@@ -2,7 +2,7 @@
 
 ## Overview
 
-![banner](resources/images/banner.png)
+![banner](https://github.com/brant-ruan/IDF4APEV/blob/master/resources/images/banner.png)
 
 **IDF4APEV** refers to *Integrated Detection Framework for Android's Privilege Escalation Vulnerabilites*.
 
