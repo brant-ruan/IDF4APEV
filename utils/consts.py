@@ -7,10 +7,15 @@
 @Desc    :
 """
 
+EXIT_SUCCESS = 0
+
+
 POC_CODE_PATH = "data/poc_code/"
 INFO_JSON_PATH = "data/"
 POC_JSON_FILE = "pocs.json"
 VULN_JSON_FILE = "vulnabilities.json"
+
+
 
 banner = """
                                                                                 

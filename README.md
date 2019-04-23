@@ -46,6 +46,16 @@ PoC tells us whether one device is vulnerable or not.
 pip install -r requirements.txt
 ```
 
+## Extra
+
+### Advantages of a Command Line Interface
+
+- **portability** almost any computer is able to drive a text terminal, so a command line interface can really run everywhere.
+- **resources** the CPU and memory cost of a command line interface is far lighter than a GUI library.
+- **speed** for advanced users, it's often faster to type a command than to dive into menus and windows.
+- **development** It is far faster to create a text oriented interface.
+- **driving** you can easily drive a text oriented program with the popen command. That means that the whole application can be tested automatically.
+
 ## Acknowledgement
 
 The banner is create with the help of *toilet*, which is a very interesting tool and can be installed through `brew install toilet` on Mac OSX :)
