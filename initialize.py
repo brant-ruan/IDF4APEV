@@ -12,11 +12,27 @@ from utils import consts
 from utils import utils
 
 SQL_CREATE_VULNERABILITY_TABLE = """
-
+CREATE TABLE "Vulnerability" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+	"vulnKernelVersion"	TEXT,
+	"vulnAndroidVersion"	TEXT,
+	"pocIsAvailable"	TEXT,
+	"pocId"	INTEGER,
+	"patchDate"	TEXT,
+	"comment"	TEXT
+)
 """
 
 SQL_CREATE_POC_TABLE = """
-
+CREATE TABLE "PoC" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+	"code"	TEXT,
+	"buildOptions"	TEXT,
+	"execOptions"	TEXT,
+	"cveId"	TEXT,
+	"risk"	TEXT,
+	"comment"	TEXT
+)
 """
 
 # initialize database

@@ -10,7 +10,7 @@
 
 ```
 Design&Structure    [√]
-poc_code/           [ ]
+poc_code/           [√]
 pocs.json           [ ]
 vulnabilities.json  [ ]
 initialize.py       [ ]
@@ -21,18 +21,15 @@ builder.py          [ ]
 executer.py         [ ]
 poc_manager.py      [ ]
 idfconsole          [ ]
+test the whole idf  [ ]
 Web UI              [ ]
-```
-
-## Dependencies
-
-```bash
-pip install -r requirements.txt
 ```
 
 ## Installation
 
-remain to be done :)
+```bash
+pip install -r requirements.txt
+```
 
 ## Acknowledgement
 

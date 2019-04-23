@@ -6,11 +6,7 @@
 /* headers */
 #include <stdio.h>
 #include <string.h>
-
-
-/* global variables and macros */
-#define VULNERABLE      7
-#define NOT_VULNERABLE  0
+#include "idf.h"
 
 int func(){
     return 1;

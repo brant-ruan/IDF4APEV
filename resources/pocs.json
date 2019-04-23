@@ -5,7 +5,7 @@
     "buildOptions": "",
     "execOptions": "",
     "cveId": "",
-    "risk": "",
+    "risk": "low",
     "comment": ""
   },
   "cve-2016-0728-poc": {
@@ -14,7 +14,7 @@
     "buildOptions": "",
     "execOptions": "",
     "cveId": "",
-    "risk": "",
+    "risk": "low",
     "comment": ""
   },
   "cve-2016-5195-poc": {
@@ -23,7 +23,7 @@
     "buildOptions": "",
     "execOptions": "",
     "cveId": "",
-    "risk": "",
+    "risk": "low",
     "comment": ""
   },
   "cve-2017-37533": {
@@ -32,7 +32,7 @@
     "buildOptions": "",
     "execOptions": "",
     "cveId": "",
-    "risk": "",
+    "risk": "low",
     "comment": ""
   },
   "cve-2017-10661-poc": {
@@ -41,7 +41,7 @@
     "buildOptions": "",
     "execOptions": "",
     "cveId": "",
-    "risk": "",
+    "risk": "low",
     "comment": ""
   }
 }
