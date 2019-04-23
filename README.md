@@ -11,9 +11,9 @@
 ```
 Design&Structure    [√]
 poc_code/           [√]
-pocs.json           [ ]
-vulnabilities.json  [ ]
-initialize.py       [ ]
+initialize.py       [√]
+pocs.json           [√]
+vulnabilities.json  [√]
 poc.py              [ ]
 vulnerability.py    [ ]
 commander.py        [ ]
@@ -23,6 +23,7 @@ poc_manager.py      [ ]
 idfconsole          [ ]
 test the whole idf  [ ]
 Web UI              [ ]
+report generator    [ ]
 ```
 
 ## Installation
