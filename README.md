@@ -32,7 +32,7 @@ report generator    [ ]
 ### Diagnosis
 
 1. If one device's kernel version is NOT located in the range of vulnerable version, it MAY BE not vulnerable.
-2. If one device's security-update-date is latter than the patch-date of a vulnerability, it MAY BE not vulnerable.
+2. If one device's security-update-date is later than the patch-date of a vulnerability, it MAY BE not vulnerable.
 
 Diagnosis is not reliable because of many elements. For a good & sarcastic example you can see the post [HOW ANDROID PHONES HIDE MISSED SECURITY UPDATES FROM YOU](https://www.wired.com/story/android-phones-hide-missed-security-updates-from-you/).
 
