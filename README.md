@@ -22,9 +22,8 @@ builder.py          [ ]
 executer.py         [ ]
 poc_manager.py      [ ]
 idfconsole          [ ]
-test the whole idf  [ ]
-Web UI              [ ]
 report generator    [ ]
+test the whole idf  [ ]
 ```
 
 ## Usage
