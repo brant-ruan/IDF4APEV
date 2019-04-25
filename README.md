@@ -27,6 +27,27 @@ Web UI              [ ]
 report generator    [ ]
 ```
 
+## Usage
+
+```bash
+show devices
+show banner
+show pocs
+show cves
+info POC_NAME
+info CVE_NAME
+# diagnose
+diagnose DEVICE_NAME
+diagnose all
+# trigger
+check all
+check all POC_NAME
+check DEVICE_NAME POC_NAME
+check DEVICE_NAME all
+# export report
+export DIRECTORY_PATH (default ~/Desktop/)
+```
+
 ## Technical Principles
 
 ### Diagnosis

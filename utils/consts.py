@@ -9,7 +9,8 @@
 
 EXIT_SUCCESS = 0
 
-
+IDF_HOME = ""
+IDF_VERSION = "0.1"
 POC_CODE_PATH = "data/poc_code/"
 INFO_JSON_PATH = "data/"
 POC_JSON_FILE = "pocs.json"

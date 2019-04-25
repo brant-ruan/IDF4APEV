@@ -7,6 +7,6 @@
 @Desc    :
 """
 
-class Vulnerability:
+class Vuln:
     def __init__(self):
         pass
