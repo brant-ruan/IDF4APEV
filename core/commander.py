@@ -7,6 +7,17 @@
 @Desc    :
 """
 
+from core.executer import Executer
+from core.builder import Builder
+from core.poc_manager import PoCManager
+import utils.utils as utils
+
 class Commander:
     def __init__(self):
-        pass
+        self.executer = Executer()
+        self.builder = Builder()
+        self.poc_manager = PoCManager()
+
+    def load_devices(self, devices):
+        self.executer.load_devices(devices)
+        utils.debug("%d device(s) connect(s)." % len(devices))

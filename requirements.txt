@@ -2,3 +2,5 @@ rsa
 adb --no-binary :all:
 cmd2
 gnureadline
+python-dateutil
+PTable

@@ -15,7 +15,7 @@ import os
 import json
 from core.models.poc import PoC
 from core.models.vuln import Vuln
-from core.models.device import Device
+from core.commander import Commander
 
 
 class IDFShell(cmd2.Cmd):
@@ -28,19 +28,20 @@ class IDFShell(cmd2.Cmd):
         super(IDFShell, self).__init__()
         self.quit_on_sigint = False
         self.echo = False
-        self.vuln_num = 0
-        self.poc_num = 0
+
         self.vulns = []
         self.pocs = []
+        self.devices = []
+
+        self.commander = Commander()
 
     def initialize(self):
         try:
             # load PoCs
-            pocs_dict = json.loads(
+            pocs_dict = json.load(
                 open(
                     consts.INFO_JSON_PATH +
                     consts.POC_JSON_FILE))
-            self.poc_num = len(pocs_dict)
             for poc_name in pocs_dict:
                 poc = PoC(
                     name=poc_name,
@@ -49,25 +50,22 @@ class IDFShell(cmd2.Cmd):
                     exec_options=pocs_dict[poc_name]['exec_options'],
                     cve=pocs_dict[poc_name]['cve'],
                     risk=pocs_dict[poc_name]['risk'],
-                    comment=pocs_dict[[poc_name]['comment']])
+                    comment=pocs_dict[poc_name]['comment'])
                 self.pocs.append(poc)
             # load vulnerabilities
-            vulns_dict = json.loads(
+            vulns_dict = json.load(
                 open(
                     consts.INFO_JSON_PATH +
                     consts.VULN_JSON_FILE))
-            self.vuln_num = len(vulns_dict)
             for vuln_name in vulns_dict:
                 vuln = Vuln(
-                    cve=vulns_dict[vuln_name]['cve'],
+                    cve=vuln_name,
                     vuln_kernel_ver=vulns_dict[vuln_name]['vuln_kernel_ver'],
                     vuln_android_ver=vulns_dict[vuln_name]['vuln_android_ver'],
                     poc_id=vulns_dict[vuln_name]['poc_id'],
                     patch_date=vulns_dict[vuln_name]['patch_date'],
-                    comment=vulns_dict[[vuln_name]['comment']])
+                    comment=vulns_dict[vuln_name]['comment'])
                 self.vulns.append(vuln)
-            # load devices
-            #TODO
         except BaseException:
             raise
 
@@ -77,8 +75,11 @@ class IDFShell(cmd2.Cmd):
         self.initialize()
         # time.sleep(0.8)
         utils.debug(
-            "%d PoCs for %d vulnerabilities loaded." %
-            (self.poc_num, self.vuln_num))
+            "%d PoC(s) for %d vulnerability/ies loaded." %
+            (len(self.pocs), len(self.vulns)))
+        # load devices
+        self.commander.load_devices(self.devices)
+
         super(IDFShell, self).preloop()
 
     def postloop(self):
@@ -87,14 +88,14 @@ class IDFShell(cmd2.Cmd):
 
     def help_introduction(self):
         self.poutput(
-            "IDF4APEV refers to Integrated Detection Framework for Android\'s Privilege Escalation Vulnerabilites.")
+            "IDF4APEV refers to Integrated Detection Framework for Android\'s Privilege Escalation Vulnerabilites.\n\n")
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_version(self, s):
         self.poutput("version: " + consts.IDF_VERSION)
 
     def help_version(self):
-        s = """Usage: version\n\nShow the version of IDF4APEV"""
+        s = "Usage: version\n\nShow the version of IDF4APEV\n\n"
         self.poutput(s)
 
     def complete_show(self, text, line, begidx, endidx):
@@ -105,43 +106,44 @@ class IDFShell(cmd2.Cmd):
         if s == "banner":
             self.poutput(consts.banner)
         elif s == "vulns":
-            pass
+            utils.show_table(self.vulns)
         elif s == "pocs":
-            pass
+            utils.show_table(self.pocs)
         elif s == "devices":
-            pass
+            self.commander.load_devices(self.devices)
+            utils.show_table(self.devices)
         else:
             self.poutput("Invalid options.")
 
     def help_show(self):
-        pass
-
-    @cmd2.with_category(CMD_IDF_FUNCTIONS)
-    def do_info(self, s):
-        pass
-
-    def help_info(self):
+        #TODO
         pass
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_diagnose(self, s):
+        #TODO
         pass
 
     def help_diagnose(self):
+        #TODO
         pass
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_check(self, s):
+        #TODO
         pass
 
     def help_check(self):
+        #TODO
         pass
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_export(self, s):
+        #TODO
         pass
 
     def help_export(self):
+        #TODO
         pass
 
 

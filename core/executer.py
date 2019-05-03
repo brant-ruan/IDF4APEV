@@ -7,6 +7,12 @@
 @Desc    :
 """
 
+import adb
+
 class Executer:
     def __init__(self):
+        pass
+
+    def load_devices(self, devices):
+        #TODO
         pass
