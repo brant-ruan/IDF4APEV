@@ -15,8 +15,8 @@ class PoC:
                  exec_options, cve, risk, comment):
         self.name = name
         self.file = consts.POC_CODE_PATH + filename
-        self.buildOptions = build_options
-        self.execOptions = exec_options
+        self.build_options = build_options
+        self.exec_options = exec_options
         self.cve = cve
         self.risk = risk
         self.comment = comment

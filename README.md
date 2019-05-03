@@ -28,12 +28,10 @@ test the whole idf  [ ]
 ## Usage
 
 ```bash
-show devices
 show banner
+show devices
 show pocs
 show cves
-info POC_NAME
-info CVE_NAME
 # diagnose
 diagnose DEVICE_NAME
 diagnose all

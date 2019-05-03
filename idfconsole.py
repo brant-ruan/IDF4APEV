@@ -10,7 +10,6 @@
 from utils import consts
 from utils import utils
 import cmd2
-import time
 import os
 import json
 from core.models.poc import PoC
@@ -87,8 +86,8 @@ class IDFShell(cmd2.Cmd):
         super(IDFShell, self).postloop()
 
     def help_introduction(self):
-        self.poutput(
-            "IDF4APEV refers to Integrated Detection Framework for Android\'s Privilege Escalation Vulnerabilites.\n\n")
+        s = "IDF4APEV refers to Integrated Detection Framework for Android\'s Privilege Escalation Vulnerabilites.\n\n"
+        self.poutput(s)
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_version(self, s):
@@ -116,34 +115,34 @@ class IDFShell(cmd2.Cmd):
             self.poutput("Invalid options.")
 
     def help_show(self):
-        #TODO
+        # TODO
         pass
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_diagnose(self, s):
-        #TODO
+        # TODO
         pass
 
     def help_diagnose(self):
-        #TODO
+        # TODO
         pass
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_check(self, s):
-        #TODO
+        # TODO
         pass
 
     def help_check(self):
-        #TODO
+        # TODO
         pass
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_export(self, s):
-        #TODO
+        # TODO
         pass
 
     def help_export(self):
-        #TODO
+        # TODO
         pass
 
 
@@ -153,7 +152,7 @@ def start_idf():
     shell = IDFShell()
     shell.colors = "Terminal"
     shell.prompt = "idf > "
-    #shell.debug = True
+    # shell.debug = True
     shell.cmdloop(intro=None)
     return
 

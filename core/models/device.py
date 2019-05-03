@@ -27,15 +27,15 @@ class Device:
                  debuggable, abi, proc_version, secure, getenforce, adb_secure):
         self.model = model
         self.serialno = serialno
-        self.sdk = sdk
-        self.security_patch_time = security_patch
         self.android_version = release
         self.kernel_version = proc_version.split(' ')[2]
         # e.g. 2019-05-03
-        self.kernel_build_time = parser.parse(
+        self.kernel_build_date = parser.parse(
             ' '.join(proc_version.split(' ')[-6:])).strftime('%Y-%m-%d')
-        self.debuggable = debuggable
+        self.security_patch_date = security_patch
+        self.sdk = sdk
         self.abi = abi
-        self.secure = secure
+        self.debuggable = debuggable
         self.selinux = getenforce
+        self.secure = secure
         self.adb_secure = adb_secure

@@ -7,13 +7,34 @@
 @Desc    :
 """
 
+from prettytable import PrettyTable
+
 RED_STR = "\033[31m%s\033[0m"
 GREEN_STR = "\033[32m%s\033[0m"
 
 
 def show_table(obj_list):
-    #TODO
-    pass
+    x = PrettyTable()
+
+    if len(obj_list) == 0:
+        return
+
+    tmp=[]
+    x.field_names = list(vars(obj_list[0]).keys())
+
+    for obj in obj_list:
+        x.add_row(list(vars(obj).values()))
+
+    nl_print(x)
+
+
+def nl_print(msg):
+    """
+    print with a new line :)
+    :param msg:
+    :return:
+    """
+    print(str(msg) + "\n")
 
 
 def debug(message, mode=0):
