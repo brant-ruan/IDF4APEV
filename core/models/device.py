@@ -5,18 +5,6 @@
 @Time    : 2019-04-23 16:31
 @Author  : Bonan Ruan
 @Desc    :
-
-adb -s SERIAL_NUM shell getprop ro.adb.secure
-adb shell getprop ro.boot.serialno
-adb shell getprop ro.build.version.release
-adb shell getprop ro.build.version.sdk
-adb shell getprop ro.build.version.security_patch
-adb shell getprop ro.debuggable
-adb shell getprop ro.product.cpu.abi
-adb shell getprop ro.product.model
-adb shell getprop ro.secure
-adb shell getenforce
-adb shell cat /proc/version
 """
 
 from dateutil import parser
@@ -24,18 +12,25 @@ from dateutil import parser
 
 class Device:
     def __init__(self, model, serialno, sdk, security_patch, release,
-                 debuggable, abi, proc_version, secure, getenforce, adb_secure):
+                 debuggable, abi, proc_version, secure, enforce, adb_secure):
         self.model = model
         self.serialno = serialno
         self.android_version = release
-        self.kernel_version = proc_version.split(' ')[2]
+        self.kernel_version = ""
+        # e.g. 3.10.65
+        tmp = proc_version.split(' ')[2]
+        for c in tmp:
+            if c in"0123456789.":
+                self.kernel_version += c
+            else:
+                break
         # e.g. 2019-05-03
         self.kernel_build_date = parser.parse(
             ' '.join(proc_version.split(' ')[-6:])).strftime('%Y-%m-%d')
-        self.security_patch_date = security_patch
+        self.sec_patch_date = security_patch
         self.sdk = sdk
         self.abi = abi
         self.debuggable = debuggable
-        self.selinux = getenforce
+        self.selinux = enforce
         self.secure = secure
         self.adb_secure = adb_secure

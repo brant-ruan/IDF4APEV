@@ -18,6 +18,7 @@ class Commander:
         self.builder = Builder()
         self.poc_manager = PoCManager()
 
-    def load_devices(self, devices):
-        self.executer.load_devices(devices)
+    def load_devices(self):
+        devices = self.executer.load_devices()
         utils.debug("%d device(s) connect(s)." % len(devices))
+        return devices

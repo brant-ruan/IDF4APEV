@@ -77,7 +77,7 @@ class IDFShell(cmd2.Cmd):
             "%d PoC(s) for %d vulnerability/ies loaded." %
             (len(self.pocs), len(self.vulns)))
         # load devices
-        self.commander.load_devices(self.devices)
+        self.devices = self.commander.load_devices()
 
         super(IDFShell, self).preloop()
 
@@ -109,7 +109,7 @@ class IDFShell(cmd2.Cmd):
         elif s == "pocs":
             utils.show_table(self.pocs)
         elif s == "devices":
-            self.commander.load_devices(self.devices)
+            self.devices = self.commander.load_devices()
             utils.show_table(self.devices)
         else:
             self.poutput("Invalid options.")
