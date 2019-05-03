@@ -12,6 +12,10 @@ from utils import utils
 import cmd2
 import time
 import os
+import json
+from core.models.poc import PoC
+from core.models.vuln import Vuln
+from core.models.device import Device
 
 
 class IDFShell(cmd2.Cmd):
@@ -22,7 +26,6 @@ class IDFShell(cmd2.Cmd):
 
     def __init__(self):
         super(IDFShell, self).__init__()
-        #self.complete_show = self.path_complete
         self.quit_on_sigint = False
         self.echo = False
         self.vuln_num = 0
@@ -30,17 +33,48 @@ class IDFShell(cmd2.Cmd):
         self.vulns = []
         self.pocs = []
 
-    def initialize(self, pocs, vulns):
-        poc_num = 0
-        vuln_num = 0
-        # TODO
-
-        return poc_num, vuln_num
+    def initialize(self):
+        try:
+            # load PoCs
+            pocs_dict = json.loads(
+                open(
+                    consts.INFO_JSON_PATH +
+                    consts.POC_JSON_FILE))
+            self.poc_num = len(pocs_dict)
+            for poc_name in pocs_dict:
+                poc = PoC(
+                    name=poc_name,
+                    filename=pocs_dict[poc_name]['filename'],
+                    build_options=pocs_dict[poc_name]['build_options'],
+                    exec_options=pocs_dict[poc_name]['exec_options'],
+                    cve=pocs_dict[poc_name]['cve'],
+                    risk=pocs_dict[poc_name]['risk'],
+                    comment=pocs_dict[[poc_name]['comment']])
+                self.pocs.append(poc)
+            # load vulnerabilities
+            vulns_dict = json.loads(
+                open(
+                    consts.INFO_JSON_PATH +
+                    consts.VULN_JSON_FILE))
+            self.vuln_num = len(vulns_dict)
+            for vuln_name in vulns_dict:
+                vuln = Vuln(
+                    cve=vulns_dict[vuln_name]['cve'],
+                    vuln_kernel_ver=vulns_dict[vuln_name]['vuln_kernel_ver'],
+                    vuln_android_ver=vulns_dict[vuln_name]['vuln_android_ver'],
+                    poc_id=vulns_dict[vuln_name]['poc_id'],
+                    patch_date=vulns_dict[vuln_name]['patch_date'],
+                    comment=vulns_dict[[vuln_name]['comment']])
+                self.vulns.append(vuln)
+            # load devices
+            #TODO
+        except BaseException:
+            raise
 
     def preloop(self):
         self.poutput(consts.banner)
         # load pocs and cves
-        self.poc_num, self.vuln_num = self.initialize(self.pocs, self.vulns)
+        self.initialize()
         # time.sleep(0.8)
         utils.debug(
             "%d PoCs for %d vulnerabilities loaded." %
