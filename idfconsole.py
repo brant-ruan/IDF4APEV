@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-@File    : idfconsole.py.py
+@File    : idfconsole.py
 @Time    : 2019-04-20 07:47
 @Author  : Bonan Ruan
 @Desc    :
@@ -131,24 +131,24 @@ class IDFShell(cmd2.Cmd):
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_check(self, s):
         self.devices = self.commander.load_devices()
-        devices_filtered = self.devices
-        pocs_filtered = self.pocs
+        device_filtered = self.devices
+        poc_filtered = self.pocs
 
         opt = s.split(' ')
         if len(opt) != 2:
             self.poutput("Invalid options.")
             return
         if opt[0] != "all":
-            devices_filtered = utils.filter_obj(self.devices, "serialno", opt[0])
-            if not devices_filtered:
+            device_filtered = utils.filter_obj(self.devices, "name", opt[0])
+            if not device_filtered:
                 self.poutput("Invalid serialno.")
                 return
         if opt[1] != "all":
-            pocs_filtered = utils.filter_obj(self.pocs, "name", opt[1])
-            if not pocs_filtered:
+            poc_filtered = utils.filter_obj(self.pocs, "name", opt[1])
+            if not poc_filtered:
                 self.poutput("Invalid poc name.")
                 return
-        self.commander.check_devices(devices_filtered, pocs_filtered)
+        self.commander.check_devices(devices=device_filtered, pocs=poc_filtered)
 
     def help_check(self):
         # TODO
@@ -166,11 +166,12 @@ class IDFShell(cmd2.Cmd):
 
 def start_idf():
     consts.IDF_HOME = os.getcwd()
-
+    # clean
+    os.system("rm -r %s/cve_* &> /dev/null" % consts.TEMP_PATH)
     shell = IDFShell()
     shell.colors = "Terminal"
     shell.prompt = "idf > "
-    # shell.debug = True
+    shell.debug = True
     shell.cmdloop(intro=None)
     return
 

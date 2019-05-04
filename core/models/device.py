@@ -11,10 +11,10 @@ from dateutil import parser
 
 
 class Device:
-    def __init__(self, model, serialno, sdk, security_patch, release,
-                 debuggable, abi, proc_version, secure, enforce, adb_secure):
+    def __init__(self, name, model, sdk, security_patch, release,
+                 debuggable, abi, proc_version, secure, enforce):
+        self.name = name
         self.model = model
-        self.serialno = serialno
         self.android_version = release
         self.kernel_version = ""
         # e.g. 3.10.65
@@ -33,4 +33,3 @@ class Device:
         self.debuggable = debuggable
         self.selinux = enforce
         self.secure = secure
-        self.adb_secure = adb_secure

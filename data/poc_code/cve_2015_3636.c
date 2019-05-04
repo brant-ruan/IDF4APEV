@@ -1,4 +1,3 @@
-#include "idf.h"
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/wait.h>
@@ -18,6 +17,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <jni.h>
+/* global variables and macros */
+#define VULNERABLE 7
+#define NOT_VULNERABLE 22
+#define ERROR -1
+#define OK 0
 
 #define MMAP_BASE 0x200000
 #define LIST_POISON 0x200200

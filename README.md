@@ -17,7 +17,7 @@ device.py           [√]
 poc.py              [√]
 vulnerability.py    [√]
 commander.py        [ ]
-builder.py          [ ]
+builder.py          [√]
 executer.py         [ ]
 poc_manager.py      [ ]
 idfconsole          [ ]
@@ -67,11 +67,11 @@ pip install -r requirements.txt
 
 ### ndk
 
-You need to download ndk for your platform (Windows/Mac OS/Linux, etc.) and set an environment variable pointing to its directory.
+You need to download ndk for your platform (Windows/Mac OS/Linux, etc.) and append the directory of `ndk-build` to `$PATH`.
 
 ### adb
 
-You need to download adb and add the path of its binaries into the `$PATH` environment variable. 
+You need to download adb and append the directory of `adb` to `$PATH`. 
 
 ## Extra
 

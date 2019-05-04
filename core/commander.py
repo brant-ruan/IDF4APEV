@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-@File    : commander.py.py
+@File    : commander.py
 @Time    : 2019-04-20 11:04
 @Author  : Bonan Ruan
 @Desc    :
@@ -11,6 +11,8 @@ from core.executer import Executer
 from core.builder import Builder
 from core.poc_manager import PoCManager
 import utils.utils as utils
+import utils.consts as consts
+import time
 
 
 class Commander:
@@ -23,6 +25,37 @@ class Commander:
         devices = self.executer.load_devices(only_number=only_number)
         return devices
 
-    def check_devices(self, pocs, devices):
-        utils.show_table(pocs)
-        utils.show_table(devices)
+    def check_devices(self, devices, pocs):
+        for device in devices:
+            for poc in pocs:
+                time.sleep(1)
+                utils.debug(
+                    "[*] Checking device <%s> with poc <%s>" %
+                    (device.name, poc.name))
+                status = self._check_device(device=device, poc=poc)
+                if status == consts.VULNERABLE:
+                    utils.debug(
+                        "[!] Device <%s> could be VULNERABLE to vulnerability <%s>" %
+                        (device.name, poc.cve), mode=consts.DEBUG_RED)
+                else:
+                    utils.debug(
+                        "[√] Device <%s> is NOT VULNERABLE to vulnerability <%s>" %
+                        (device.name, poc.cve), mode=consts.DEBUG_GREEN)
+                print("")
+
+    def _check_device(self, device, poc):
+        utils.debug(
+            "[*] \tBuilding\tpoc: %s\tsdk: android-%s\tabi: %s" %
+            (poc.file, device.sdk, device.abi))
+        file_path = self.builder.build_poc(
+            poc_file=poc.file, device_name=device.name, abi=device.abi, sdk=device.sdk)
+
+        time.sleep(0.5)
+
+        utils.debug(
+            "[*] \tExecuting\tpoc: %s\tdevice: %s" %
+            (poc.file, device.name))
+        status = self.executer.exec_poc(
+            device_name=device.name, binary=file_path)
+
+        return status

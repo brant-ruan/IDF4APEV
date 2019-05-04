@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-@File    : functions.py.py
+@File    : utils.py
 @Time    : 2019-04-20 16:04
 @Author  : Bonan Ruan
 @Desc    :
@@ -9,13 +9,20 @@
 
 from prettytable import PrettyTable
 
-RED_STR = "\033[31m%s\033[0m"
-GREEN_STR = "\033[32m%s\033[0m"
+
+def write_file(file_path, content):
+    try:
+        f = open(file_path, "w")
+        f.write(content)
+        f.close()
+    except BaseException:
+        raise
 
 
 def filter_obj(obj_list, entry_name, entry_value):
     try:
-        return [obj for obj in obj_list if obj.__dict__[entry_name] == entry_value]
+        return [obj for obj in obj_list if obj.__dict__[
+            entry_name] == entry_value]
     except BaseException:
         return []
 
@@ -41,6 +48,10 @@ def nl_print(msg):
     :return:
     """
     print(str(msg) + "\n")
+
+
+RED_STR = "\033[31m%s\033[0m"
+GREEN_STR = "\033[32m%s\033[0m"
 
 
 def debug(message, mode=0):

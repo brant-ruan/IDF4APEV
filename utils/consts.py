@@ -7,16 +7,26 @@
 @Desc    :
 """
 
-EXIT_SUCCESS = 0
-
-IDF_HOME = ""
 IDF_VERSION = "0.1"
+
+
+DEBUG_GREEN = 0
+DEBUG_RED = 1
+
+
+# Return Values
+EXIT_SUCCESS = 0
+VULNERABLE = 7
+NOT_VULNERABLE = 22
+
+
+# Paths
+IDF_HOME = "" # will be loaded when idf starts up
 POC_CODE_PATH = "data/poc_code/"
 INFO_JSON_PATH = "data/"
 POC_JSON_FILE = "pocs.json"
 VULN_JSON_FILE = "vulns.json"
-
-
+TEMP_PATH = "temp/"
 
 banner = """
                                                                                 

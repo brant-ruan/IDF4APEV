@@ -22,7 +22,11 @@
 #include <err.h>
 #include <poll.h>
 #include <unistd.h>
-#include "idf.h"
+/* global variables and macros */
+#define VULNERABLE 7
+#define NOT_VULNERABLE 22
+#define ERROR -1
+#define OK 0
 
 void *callrename(void *ptr);
 void *openclose(void *ptr);
