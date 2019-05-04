@@ -35,6 +35,7 @@ class IDFShell(cmd2.Cmd):
         self.commander = Commander()
 
     def initialize(self):
+
         try:
             # load PoCs
             pocs_dict = json.load(
@@ -77,8 +78,8 @@ class IDFShell(cmd2.Cmd):
             "%d PoC(s) for %d vulnerability/ies loaded." %
             (len(self.pocs), len(self.vulns)))
         # load devices
-        self.devices = self.commander.load_devices()
-
+        self.devices = self.commander.load_devices(only_number=True)
+        utils.debug("%d device(s) connect(s)." % len(self.devices))
         super(IDFShell, self).preloop()
 
     def postloop(self):
@@ -129,8 +130,25 @@ class IDFShell(cmd2.Cmd):
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_check(self, s):
-        # TODO
-        pass
+        self.devices = self.commander.load_devices()
+        devices_filtered = self.devices
+        pocs_filtered = self.pocs
+
+        opt = s.split(' ')
+        if len(opt) != 2:
+            self.poutput("Invalid options.")
+            return
+        if opt[0] != "all":
+            devices_filtered = utils.filter_obj(self.devices, "serialno", opt[0])
+            if not devices_filtered:
+                self.poutput("Invalid serialno.")
+                return
+        if opt[1] != "all":
+            pocs_filtered = utils.filter_obj(self.pocs, "name", opt[1])
+            if not pocs_filtered:
+                self.poutput("Invalid poc name.")
+                return
+        self.commander.check_devices(devices_filtered, pocs_filtered)
 
     def help_check(self):
         # TODO

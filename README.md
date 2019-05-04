@@ -36,7 +36,7 @@ show cves
 diagnose DEVICE_NAME
 diagnose all
 # trigger
-check all
+check all all
 check all POC_NAME
 check DEVICE_NAME POC_NAME
 check DEVICE_NAME all
@@ -59,9 +59,19 @@ PoC tells us whether one device is vulnerable or not.
 
 ## Installation
 
+### Python Modules
+
 ```bash
 pip install -r requirements.txt
 ```
+
+### ndk
+
+You need to download ndk for your platform (Windows/Mac OS/Linux, etc.) and set an environment variable pointing to its directory.
+
+### adb
+
+You need to download adb and add the path of its binaries into the `$PATH` environment variable. 
 
 ## Extra
 

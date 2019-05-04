@@ -20,10 +20,14 @@ class Executer:
     def __init__(self):
         pass
 
-    def load_devices(self):
+    def load_devices(self, only_number=False):
         # print(adb_commands.AdbCommands.Devices())
         client = AdbClient(host="127.0.0.1", port=5037)
         adb_devices = client.devices()
+        # details not needed, we only need the number of connecting devices
+        if only_number:
+            return [x for x in range(len(adb_devices))]
+
         devices = []
         for dev in adb_devices:
             # adb shell getprop ro.adb.secure

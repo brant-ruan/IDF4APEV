@@ -13,13 +13,19 @@ RED_STR = "\033[31m%s\033[0m"
 GREEN_STR = "\033[32m%s\033[0m"
 
 
+def filter_obj(obj_list, entry_name, entry_value):
+    try:
+        return [obj for obj in obj_list if obj.__dict__[entry_name] == entry_value]
+    except BaseException:
+        return []
+
+
 def show_table(obj_list):
     x = PrettyTable()
 
     if len(obj_list) == 0:
         return
 
-    tmp=[]
     x.field_names = list(vars(obj_list[0]).keys())
 
     for obj in obj_list:
