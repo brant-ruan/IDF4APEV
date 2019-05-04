@@ -35,7 +35,6 @@ class IDFShell(cmd2.Cmd):
         self.commander = Commander()
 
     def initialize(self):
-
         try:
             # load PoCs
             pocs_dict = json.load(
@@ -70,7 +69,7 @@ class IDFShell(cmd2.Cmd):
             raise
 
     def preloop(self):
-        self.poutput(consts.banner)
+        utils.nl_print(consts.banner)
         # load pocs and cves
         self.initialize()
         # time.sleep(0.8)
@@ -80,23 +79,33 @@ class IDFShell(cmd2.Cmd):
         # load devices
         self.devices = self.commander.load_devices(only_number=True)
         utils.debug("%d device(s) connect(s)." % len(self.devices))
+        print("")
+
+        # add completion of poc.name for <check> command
+        l = list(IDFShell._AVAILABLE_CHECK)
+        l.extend([poc.name for poc in self.pocs])
+        l.extend([device for device in self.devices])
+        IDFShell._AVAILABLE_CHECK = tuple(l)
+
         super(IDFShell, self).preloop()
 
     def postloop(self):
-        self.poutput("Bye.")
+        # clean
+        os.system("rm -r %s/cve_* &> /dev/null" % consts.TEMP_PATH)
+        utils.nl_print("Bye.")
         super(IDFShell, self).postloop()
 
     def help_introduction(self):
-        s = "IDF4APEV refers to Integrated Detection Framework for Android\'s Privilege Escalation Vulnerabilites.\n\n"
-        self.poutput(s)
+        s = "IDF4APEV refers to Integrated Detection Framework for Android\'s Privilege Escalation Vulnerabilites."
+        utils.nl_print(s)
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_version(self, s):
-        self.poutput("version: " + consts.IDF_VERSION)
+        utils.nl_print("version: " + consts.IDF_VERSION)
 
     def help_version(self):
-        s = "Usage: version\n\nShow the version of IDF4APEV\n\n"
-        self.poutput(s)
+        s = "Usage: version\n\nShow the version of IDF4APEV."
+        utils.nl_print(s)
 
     def complete_show(self, text, line, begidx, endidx):
         return [i for i in self._AVAILABLE_SHOW if i.startswith(text)]
@@ -104,7 +113,7 @@ class IDFShell(cmd2.Cmd):
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_show(self, s):
         if s == "banner":
-            self.poutput(consts.banner)
+            utils.nl_print(consts.banner)
         elif s == "vulns":
             utils.show_table(self.vulns)
         elif s == "pocs":
@@ -113,11 +122,12 @@ class IDFShell(cmd2.Cmd):
             self.devices = self.commander.load_devices()
             utils.show_table(self.devices)
         else:
-            self.poutput("Invalid options.")
+            utils.nl_print("Invalid options.")
 
     def help_show(self):
-        # TODO
-        pass
+        s = "Usage: show [banner | pocs | vulns | devices]\n\n" + \
+            "Show IDF's banner, available PoCs, vulnerabilities or connecting devices."
+        utils.nl_print(s)
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_diagnose(self, s):
@@ -128,31 +138,39 @@ class IDFShell(cmd2.Cmd):
         # TODO
         pass
 
+    def complete_check(self, text, line, begidx, endidx):
+        return [i for i in self._AVAILABLE_CHECK if i.startswith(text)]
+
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_check(self, s):
         self.devices = self.commander.load_devices()
+
         device_filtered = self.devices
         poc_filtered = self.pocs
 
         opt = s.split(' ')
         if len(opt) != 2:
-            self.poutput("Invalid options.")
+            utils.nl_print("Invalid options.")
             return
         if opt[0] != "all":
             device_filtered = utils.filter_obj(self.devices, "name", opt[0])
             if not device_filtered:
-                self.poutput("Invalid serialno.")
+                utils.nl_print("Invalid device name.")
                 return
         if opt[1] != "all":
             poc_filtered = utils.filter_obj(self.pocs, "name", opt[1])
             if not poc_filtered:
-                self.poutput("Invalid poc name.")
+                utils.nl_print("Invalid poc name.")
                 return
-        self.commander.check_devices(devices=device_filtered, pocs=poc_filtered)
+        self.commander.check_devices(
+            devices=device_filtered, pocs=poc_filtered)
 
     def help_check(self):
-        # TODO
-        pass
+        s = "Usage: check DEVICE_NAME POC_NAME\n\n" + \
+            "Check whether specified device(s) is/are vulnerable to specified vulnerability/ies or not.\n" + \
+            "You can use 'all' to indicate that you want to apply 'check' with all the related objects.\n" + \
+            "e.g. \'check all all\' means to test all available PoCs on all connecting devices."
+        utils.nl_print(s)
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_export(self, s):
@@ -166,8 +184,6 @@ class IDFShell(cmd2.Cmd):
 
 def start_idf():
     consts.IDF_HOME = os.getcwd()
-    # clean
-    os.system("rm -r %s/cve_* &> /dev/null" % consts.TEMP_PATH)
     shell = IDFShell()
     shell.colors = "Terminal"
     shell.prompt = "idf > "

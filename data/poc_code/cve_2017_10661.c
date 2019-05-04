@@ -69,7 +69,7 @@ int check(int argc, char **argv)
         return ERROR;
     }
 
-    int try_cnt = 10000000, cnt = 0;
+    int try_cnt = 1000000, cnt = 0;
     while (cnt < try_cnt)
     {
         if (timerfd_settime(fd, TFD_TIMER_ABSTIME, &new_value, NULL) == -1)

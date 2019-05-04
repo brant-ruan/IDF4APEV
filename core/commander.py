@@ -50,8 +50,6 @@ class Commander:
         file_path = self.builder.build_poc(
             poc_file=poc.file, device_name=device.name, abi=device.abi, sdk=device.sdk)
 
-        time.sleep(0.5)
-
         utils.debug(
             "[*] \tExecuting\tpoc: %s\tdevice: %s" %
             (poc.file, device.name))

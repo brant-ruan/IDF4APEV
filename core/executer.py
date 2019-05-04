@@ -11,23 +11,21 @@ from core.models.device import Device
 #from models.device import Device
 from adb.client import Client as AdbClient
 import utils.consts as consts
-
+import utils.utils as utils
 # you can use the command below to get the return value of an execution of adb shell.
 # R=$(adb shell 'ls /mnt/; echo $?' | tail -1 | tr -d '\r')
 
 
 class Executer:
     def __init__(self):
-        pass
+        self.client = AdbClient(host="127.0.0.1", port=5037)
 
     def load_devices(self, only_number=False):
         try:
-            # print(adb_commands.AdbCommands.Devices())
-            client = AdbClient(host="127.0.0.1", port=5037)
-            adb_devices = client.devices()
+            adb_devices = self.client.devices()
             # details not needed, we only need the number of connecting devices
             if only_number:
-                return [x for x in range(len(adb_devices))]
+                return [device.get_serial_no() for device in adb_devices]
 
             devices = []
             for dev in adb_devices:
@@ -56,25 +54,38 @@ class Executer:
                 enforce = str(dev.shell("getenforce")).strip()
                 device = Device(
                     name=name,
-                    model=props['ro.product.model'],
-                    sdk=props['ro.build.version.sdk'],
-                    security_patch=props['ro.build.version.security_patch'],
-                    release=props['ro.build.version.release'],
-                    debuggable=props['ro.debuggable'],
-                    abi=props['ro.product.cpu.abi'],
+                    model=props.get('ro.product.model', ''),
+                    sdk=props.get('ro.build.version.sdk', ''),
+                    security_patch=props.get(
+                        'ro.build.version.security_patch', ''),
+                    release=props.get('ro.build.version.release', ''),
+                    debuggable=props.get('ro.debuggable', ''),
+                    abi=props.get('ro.product.cpu.abi', ''),
                     proc_version=proc_version,
-                    secure=props['ro.secure'],
+                    secure=props.get('ro.secure', ''),
                     enforce=enforce
                 )
                 devices.append(device)
 
             return devices
-        except KeyError as ke:
-            print(ke)
+        except BaseException as e:
+            utils.nl_print(e)
 
     def exec_poc(self, device_name, binary):
+        device = self.client.device(device_name)
 
-        return consts.NOT_VULNERABLE
+        dst = consts.DEVICE_TMP + binary.split('/')[-1]
+
+        device.push(binary, dst)
+
+        device.shell("chmod 777 %s" % dst)
+        # run poc on device
+        res = str(
+            device.shell(
+                "cd %s; %s &>/dev/null; echo $?" %
+                (consts.DEVICE_TMP, dst))).strip()
+
+        return res
 
 
 if __name__ == "__main__":
