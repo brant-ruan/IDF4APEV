@@ -1,34 +1,34 @@
 {
   "cve-2015-3636": {
-    "vuln_kernel_ver": "x < 4.0.3",
+    "vuln_kernel_ver": ["", "4.0.3"],
     "vuln_android_ver": "",
     "poc_id": "cve-2015-3636-poc",
     "patch_date": "2015-05-02",
     "comment": ""
   },
   "cve-2016-0728": {
-    "vuln_kernel_ver": "x < 4.4.1",
+    "vuln_kernel_ver": ["", "4.4.1"],
     "vuln_android_ver": "",
     "poc_id": "cve-2016-0728-poc",
     "patch_date": "2016-01-19",
     "comment": ""
   },
   "cve-2016-5195": {
-    "vuln_kernel_ver": "2.6.22 <= x < 4.8.3",
+    "vuln_kernel_ver": ["2.6.22", "4.8.3"],
     "vuln_android_ver": "",
     "poc_id": "cve-2016-5195-poc",
     "patch_date": "2016-10-18",
     "comment": ""
   },
   "cve-2017-7533": {
-    "vuln_kernel_ver": "x < 4.12.4",
+    "vuln_kernel_ver": ["", "4.12.4"],
     "vuln_android_ver": "",
     "poc_id": "cve-2017-7533-poc",
     "patch_date": "2017-07-08",
     "comment": ""
   },
   "cve-2017-10661": {
-    "vuln_kernel_ver": "x < 4.10.15",
+    "vuln_kernel_ver": ["", "4.10.15"],
     "vuln_android_ver": "",
     "poc_id": "cve-2017-10661-poc",
     "patch_date": "2017-02-10",

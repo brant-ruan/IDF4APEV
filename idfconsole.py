@@ -132,6 +132,9 @@ class IDFShell(cmd2.Cmd):
             "Show IDF's banner, available PoCs, vulnerabilities or connecting devices."
         utils.nl_print(s)
 
+    def complete_diagnose(self, text, line, begidx, endidx):
+        return [i for i in self._AVAILABLE_DIAGNOSE if i.startswith(text)]
+
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_diagnose(self, s):
         self.devices = self.commander.load_devices()
@@ -141,7 +144,8 @@ class IDFShell(cmd2.Cmd):
             if not device_filtered:
                 utils.nl_print("Invalid device name.")
                 return
-        self.commander.diagnose_devices(devices=device_filtered, vulns=self.vulns)
+        self.commander.diagnose_devices(
+            devices=device_filtered, vulns=self.vulns)
 
     def help_diagnose(self):
         s = "Usage: diagnose DEVICE_NAME\n\n" + \

@@ -7,7 +7,7 @@
 @Desc    :
 """
 
-IDF_VERSION = "0.1"
+IDF_VERSION = "1.0"
 
 
 DEBUG_GREEN = 0

@@ -16,11 +16,11 @@ vulnabilities.json  [√]
 device.py           [√]
 poc.py              [√]
 vulnerability.py    [√]
-commander.py        [ ]
+commander.py        [√]
 builder.py          [√]
 executer.py         [√]
 idfconsole          [√]
-test the whole idf  [ ]
+test the whole idf  [√]
 ```
 
 ## Usage
