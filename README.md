@@ -2,7 +2,7 @@
 
 ## Overview
 
-![banner](https://github.com/brant-ruan/IDF4APEV/blob/master/resources/images/banner.png)
+![banner.png](https://github.com/brant-ruan/IDF4APEV/blob/master/resources/images/banner.png)
 
 **IDF4APEV** refers to *Integrated Detection Framework for Android's Privilege Escalation Vulnerabilites*.
 
@@ -68,6 +68,10 @@ You need to download ndk for your platform (Windows/Mac OS/Linux, etc.) and appe
 ### adb
 
 You need to download adb and append the directory of `adb` to `$PATH`. 
+
+## Demo
+
+![demo.jpg](https://github.com/brant-ruan/IDF4APEV/blob/master/resources/images/demo.jpg)
 
 ## Extra
 
