@@ -19,9 +19,7 @@ vulnerability.py    [√]
 commander.py        [ ]
 builder.py          [√]
 executer.py         [√]
-poc_manager.py      [ ]
-idfconsole          [ ]
-report generator    [ ]
+idfconsole          [√]
 test the whole idf  [ ]
 ```
 
@@ -40,8 +38,6 @@ check all all
 check all POC_NAME
 check DEVICE_NAME POC_NAME
 check DEVICE_NAME all
-# export report
-export DIRECTORY_PATH (default ~/Desktop/)
 ```
 
 ## Technical Principles

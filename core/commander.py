@@ -35,7 +35,7 @@ class Commander:
                 status = self._check_device(device=device, poc=poc)
                 if status == consts.VULNERABLE:
                     utils.debug(
-                        "[!] Device <%s> could be VULNERABLE to vulnerability <%s>" %
+                        "[!] Device <%s> is VULNERABLE to vulnerability <%s>" %
                         (device.name, poc.cve), mode=consts.DEBUG_RED)
                 else:
                     utils.debug(
@@ -56,4 +56,27 @@ class Commander:
         status = self.executer.exec_poc(
             device_name=device.name, binary=file_path)
 
+        return status
+
+    def diagnose_devices(self, devices, vulns):
+        for device in devices:
+            for vuln in vulns:
+                utils.debug(
+                    "[*] Diagnosing device <%s> with vulnerability <%s>" %
+                    (device.name, vuln.cve))
+                status = self._diagnose_device(device, vuln)
+                if status == consts.VULNERABLE:
+                    utils.debug(
+                        "[!] Device <%s> MAY BE VULNERABLE to vulnerability <%s>" %
+                        (device.name, vuln.cve), mode=consts.DEBUG_YELLOW)
+                else:
+                    utils.debug(
+                        "[√] Device <%s> MAY BE NOT VULNERABLE to vulnerability <%s>" %
+                        (device.name, vuln.cve), mode=consts.DEBUG_YELLOW)
+                print("")
+
+    def _diagnose_device(self, device, vuln):
+
+        #TODO
+        status = consts.NOT_VULNERABLE
         return status

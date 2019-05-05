@@ -52,6 +52,7 @@ def nl_print(msg):
 
 RED_STR = "\033[31m%s\033[0m"
 GREEN_STR = "\033[32m%s\033[0m"
+YELLOW_STR = "\033[33m%s\033[0m"
 
 
 def debug(message, mode=0):
@@ -59,6 +60,10 @@ def debug(message, mode=0):
         print(GREEN_STR % message)
     elif mode == 1:
         print(RED_STR % message)
+    elif mode == 2:
+        print(YELLOW_STR % message)
+    else:
+        print(message)
     return
 
 

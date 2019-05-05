@@ -8,7 +8,6 @@
 """
 
 from core.models.device import Device
-#from models.device import Device
 from adb.client import Client as AdbClient
 import utils.consts as consts
 import utils.utils as utils

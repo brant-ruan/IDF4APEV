@@ -81,11 +81,14 @@ class IDFShell(cmd2.Cmd):
         utils.debug("%d device(s) connect(s)." % len(self.devices))
         print("")
 
-        # add completion of poc.name for <check> command
+        # add completion of poc.name for <check> and <diagnose> command
         l = list(IDFShell._AVAILABLE_CHECK)
         l.extend([poc.name for poc in self.pocs])
         l.extend([device for device in self.devices])
         IDFShell._AVAILABLE_CHECK = tuple(l)
+        l = list(IDFShell._AVAILABLE_DIAGNOSE)
+        l.extend([device for device in self.devices])
+        IDFShell._AVAILABLE_DIAGNOSE = tuple(l)
 
         super(IDFShell, self).preloop()
 
@@ -131,12 +134,22 @@ class IDFShell(cmd2.Cmd):
 
     @cmd2.with_category(CMD_IDF_FUNCTIONS)
     def do_diagnose(self, s):
-        # TODO
-        pass
+        self.devices = self.commander.load_devices()
+        device_filtered = self.devices
+        if s != "all":
+            device_filtered = utils.filter_obj(self.devices, "name", s)
+            if not device_filtered:
+                utils.nl_print("Invalid device name.")
+                return
+        self.commander.diagnose_devices(devices=device_filtered, vulns=self.vulns)
 
     def help_diagnose(self):
-        # TODO
-        pass
+        s = "Usage: diagnose DEVICE_NAME\n\n" + \
+            "Diagnose whether specified device(s) is/are vulnerable to specified vulnerability/ies or not.\n" + \
+            "Diagnosis may be INACCURATE. You should 'check' devices for reliability.\n" + \
+            "You can use 'all' to indicate that you want to apply 'diagnose' with all the related objects.\n" + \
+            "e.g. \'diagnose all\' means to diagnose all connecting devices."
+        utils.nl_print(s)
 
     def complete_check(self, text, line, begidx, endidx):
         return [i for i in self._AVAILABLE_CHECK if i.startswith(text)]
@@ -171,15 +184,6 @@ class IDFShell(cmd2.Cmd):
             "You can use 'all' to indicate that you want to apply 'check' with all the related objects.\n" + \
             "e.g. \'check all all\' means to test all available PoCs on all connecting devices."
         utils.nl_print(s)
-
-    @cmd2.with_category(CMD_IDF_FUNCTIONS)
-    def do_export(self, s):
-        # TODO
-        pass
-
-    def help_export(self):
-        # TODO
-        pass
 
 
 def start_idf():

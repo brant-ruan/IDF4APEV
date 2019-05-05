@@ -12,7 +12,7 @@ IDF_VERSION = "0.1"
 
 DEBUG_GREEN = 0
 DEBUG_RED = 1
-
+DEBUG_YELLOW = 2
 
 # Return Values
 EXIT_SUCCESS = 0
