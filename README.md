@@ -16,6 +16,7 @@ vulnabilities.json  [√]
 device.py           [√]
 poc.py              [√]
 vulnerability.py    [√]
+result.py           [√]
 commander.py        [√]
 builder.py          [√]
 executer.py         [√]
@@ -38,6 +39,10 @@ check all all
 check all POC_NAME
 check DEVICE_NAME POC_NAME
 check DEVICE_NAME all
+# export report as markdown file into reports/
+export
+# clean result auto-generated before
+reset
 ```
 
 ## Technical Principles

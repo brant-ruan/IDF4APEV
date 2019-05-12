@@ -15,6 +15,7 @@ import json
 from core.models.poc import PoC
 from core.models.vuln import Vuln
 from core.commander import Commander
+from core.models.result import Result
 
 
 class IDFShell(cmd2.Cmd):
@@ -31,6 +32,7 @@ class IDFShell(cmd2.Cmd):
         self.vulns = []
         self.pocs = []
         self.devices = []
+        self.result = Result()
 
         self.commander = Commander()
 
@@ -145,7 +147,7 @@ class IDFShell(cmd2.Cmd):
                 utils.nl_print("Invalid device name.")
                 return
         self.commander.diagnose_devices(
-            devices=device_filtered, vulns=self.vulns)
+            devices=device_filtered, vulns=self.vulns, result=self.result)
 
     def help_diagnose(self):
         s = "Usage: diagnose DEVICE_NAME\n\n" + \
@@ -180,7 +182,7 @@ class IDFShell(cmd2.Cmd):
                 utils.nl_print("Invalid poc name.")
                 return
         self.commander.check_devices(
-            devices=device_filtered, pocs=poc_filtered)
+            devices=device_filtered, pocs=poc_filtered, result=self.result)
 
     def help_check(self):
         s = "Usage: check DEVICE_NAME POC_NAME\n\n" + \
@@ -189,6 +191,22 @@ class IDFShell(cmd2.Cmd):
             "e.g. \'check all all\' means to test all available PoCs on all connecting devices."
         utils.nl_print(s)
 
+    def help_export(self):
+        s = "Usage: export\n\n" + \
+            "Export results auto-generated up to now in markdown format into reports/."
+        utils.nl_print(s)
+
+    @cmd2.with_category(CMD_IDF_FUNCTIONS)
+    def do_export(self, s):
+        self.commander.export_result(self.result)
+
+    def help_reset(self):
+        s = "Usage: reset\n\n" + \
+            "Discard the results auto-generated before."
+        utils.nl_print(s)
+
+    def do_reset(self, s):
+        self.result.reset()
 
 def start_idf():
     consts.IDF_HOME = os.getcwd()

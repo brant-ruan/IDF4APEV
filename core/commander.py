@@ -25,7 +25,7 @@ class Commander:
         devices = self.executer.load_devices(only_number=only_number)
         return devices
 
-    def check_devices(self, devices, pocs):
+    def check_devices(self, devices, pocs, result):
         for device in devices:
             for poc in pocs:
                 time.sleep(1)
@@ -43,6 +43,8 @@ class Commander:
                         (device.name, poc.cve), mode=consts.DEBUG_GREEN)
                 print("")
 
+                result.add_check_result(device=device, poc=poc, status=status)
+
     def _check_device(self, device, poc):
         utils.debug(
             "[*] \tBuilding\tpoc: %s\tsdk: android-%s\tabi: %s" %
@@ -58,7 +60,7 @@ class Commander:
 
         return status
 
-    def diagnose_devices(self, devices, vulns):
+    def diagnose_devices(self, devices, vulns, result):
         for device in devices:
             for vuln in vulns:
                 utils.debug(
@@ -75,6 +77,8 @@ class Commander:
                         (device.name, vuln.cve), mode=consts.DEBUG_GREEN)
                 print("")
 
+                result.add_diagnose_result(device=device, vuln=vuln, status=status)
+
     def _diagnose_device(self, device, vuln):
         # if security patch date is not earlier than the patch date of vuln
         # then this device may be not vulnerable
@@ -90,6 +94,8 @@ class Commander:
 
         return consts.VULNERABLE
 
+    def export_result(self, result=None):
+        result.export()
 
 def _date_is_earlier(device_date, patch_date):
     try:
@@ -129,3 +135,7 @@ def _version_to_int(version):
         ver_num += int(sub_ver) * i
         i *= 1000
     return ver_num
+
+
+if __name__ == "__main__":
+    a = Commander()
