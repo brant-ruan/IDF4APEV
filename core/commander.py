@@ -77,7 +77,8 @@ class Commander:
                         (device.name, vuln.cve), mode=consts.DEBUG_GREEN)
                 print("")
 
-                result.add_diagnose_result(device=device, vuln=vuln, status=status)
+                result.add_diagnose_result(
+                    device=device, vuln=vuln, status=status)
 
     def _diagnose_device(self, device, vuln):
         # if security patch date is not earlier than the patch date of vuln
@@ -96,6 +97,7 @@ class Commander:
 
     def export_result(self, result=None):
         result.export()
+
 
 def _date_is_earlier(device_date, patch_date):
     try:
