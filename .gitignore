@@ -22,3 +22,4 @@ build_tools/ndk/
 *.DS_Store
 *.pyc
 temp/cve_*/
+videos/
