@@ -90,4 +90,4 @@ You need to download adb and append the directory of `adb` to `$PATH`.
 
 ## Acknowledgement
 
-The banner is create with the help of *toilet*, which is a very interesting tool and can be installed through `brew install toilet` on Mac OSX :)
+The banner is created with the help of *toilet*, which is a very interesting tool and can be installed through `brew install toilet` on Mac OSX :)
